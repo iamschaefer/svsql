@@ -11,8 +11,10 @@ describe 'TSV Parsing' do
 
   it 'should parse all rows' do
     file = 'spec/fixtures/nasa_19950801.tsv'
-    options = ["\t", file, @db_file]
-    Svsql.main(options)
+    options = [file, "\t", @db_file]
+    # so we don't get puts in the test results
+    null_out = File.open(File::NULL, 'w')
+    Svsql.main(options, null_out)
 
     db = SQLite3::Database.open(@db_file)
     result = db.execute(" select count(*) from 'tsvql'")
