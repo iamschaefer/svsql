@@ -6,7 +6,7 @@ require 'sqlite3'
 ##
 # Core of the SVSQL module. This is the interface to the outside world.
 module Svsql
-  BATCH_SIZE = 20_000 # experimentally tuned
+  BATCH_SIZE = 500 # by default, this is the maximum for SQLite3 compilations. It would be much faster if we increased this though.
   DEFAULT_TABLE = 'tsvql'.freeze
 
   def self.line_to_array(line, separator)
@@ -99,8 +99,5 @@ module Svsql
 
   def self.try_execute(db, *args)
     db.execute(*args)
-  rescue SQLite3::SQLException => e
-    $stderr.puts "Failed executing statement:\n #{args}"
-    raise e
   end
 end

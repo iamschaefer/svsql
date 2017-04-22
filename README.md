@@ -28,6 +28,10 @@ Or install it yourself as:
 
 Usage is changing very quickly, so this won't be documented for a while. Your best bet is to check the specs for examples.
 
+## Dependencies
+
+Requires SQLite3 3.7.11 or higher
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
