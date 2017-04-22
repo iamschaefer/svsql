@@ -35,6 +35,7 @@ module Svsql
     db = SQLite3::Database.new ap.destination
     column_names = parse_column_names(f, ap.delimiter)
     create_table(column_names, db)
+    create_indices(column_names, db)
     line_count = insert_rows(db, f, ap.delimiter)
     db.close
     line_count
@@ -78,6 +79,17 @@ module Svsql
 
     create_table_command_parts << ");\n"
     try_execute(db, create_table_command_parts.join)
+  end
+
+  ##
+  # Create indicies for every column that ends in 'id'
+  def self.create_indices(column_names, db)
+    column_names.each do |c|
+      if c.downcase.end_with? 'id'
+        command = "create index #{c}_index on #{DEFAULT_TABLE}(#{c})"
+        try_execute(db, command)
+      end
+    end
   end
 
   def self.parse_column_names(f, separator)

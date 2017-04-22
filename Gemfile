@@ -3,8 +3,8 @@ source 'https://rubygems.org'
 # Specify your gem's dependencies in svsql.gemspec
 gemspec
 
-gem 'sqlite3', platform: [:ruby, :mswin, :mingw]
 gem 'jdbc-sqlite3', platform: :jruby
+gem 'sqlite3', platform: %i[ruby mswin mingw]
 
 group :development, :test do
   gem 'pry'
