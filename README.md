@@ -6,6 +6,8 @@
 
 svSQL is a tool for converting CSVs, TSVs, |SVs, and other tabulated data to SQL for easier analysis and importing. The project was motivated by my need to analyze multiple large dumps of TSV and CSV data quickly, but svSQL is also very useful for importing data into your application's database.
 
+svSQL is currently in the alpha stage, so you should expect breaking changes often.
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -24,7 +26,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Usage is changing very quickly, so this won't be documented for a while. Your best bet is to check the specs for examples.
 
 ## Development
 
@@ -35,7 +37,6 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/iamschaefer/svsql. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
-
 
 ## License
 
