@@ -1,5 +1,9 @@
 # svSQL
 
+[![Build Status](https://secure.travis-ci.org/iamschaefer/svsql.svg)](http://travis-ci.org/iamschaefer/svsql?branch=master)
+[![Code Climate](https://codeclimate.com/github/iamschaefer/svsql.svg)](https://codeclimate.com/github/iamschaefer/svsql)
+
+
 svSQL is a tool for converting CSVs, TSVs, |SVs, and other tabulated data to SQL for easier analysis and importing. The project was motivated by my need to analyze multiple large dumps of TSV and CSV data quickly, but svSQL is also very useful for importing data into your application's database.
 
 ## Installation
