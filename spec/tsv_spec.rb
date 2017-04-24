@@ -9,7 +9,8 @@ describe 'TSV file' do
     File.delete(journal) if File.exist?(journal)
 
     file = 'spec/fixtures/nasa_19950801.tsv'
-    options = [file, "\t", db_file]
+    options = [file, "\t", db_file,
+               'nvarchar(32)', 'text', 'text', 'datetime', 'nvarchar(32)', 'text', 'int', 'text']
     # so we don't get puts in the test results
     null_out = File.open(File::NULL, 'w')
     Svsql.main(options, null_out)
@@ -37,5 +38,11 @@ describe 'TSV file' do
     table_names = result.map { |r| r['name'] }
     expect(table_names).to match_array %w[id host logname time method url bytes useragent]
   end
-  pending 'has correct types'
+  it 'has correct column types' do
+    result = @db.table_info('tsvql')
+    table_names = result.map { |r| r['type'] }
+    expected_types = ['nvarchar(32)', 'text', 'text', 'datetime', 'nvarchar(32)', 'text', 'int', 'text']
+    expect(table_names).to match_array expected_types
+  end
+  pending 'reasonable default column types'
 end

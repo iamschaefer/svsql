@@ -6,7 +6,7 @@ require 'sqlite3'
 ##
 # Core of the SVSQL module. This is the interface to the outside world.
 module Svsql
-  BATCH_SIZE = 500 # by default, this is the maximum for SQLite3 compilations. It would be much faster if we increased this though.
+  BATCH_SIZE = 500 # by default, this is the maximum for SQLite3 compilations. TODO: increase this.
   DEFAULT_TABLE = 'tsvql'.freeze
 
   def self.line_to_array(line, separator)
@@ -34,7 +34,7 @@ module Svsql
   def self.write_db(ap, f)
     db = SQLite3::Database.new ap.destination
     column_names = parse_column_names(f, ap.delimiter)
-    create_table(column_names, db)
+    create_table(column_names, db, ap)
     create_indices(column_names, db)
     line_count = insert_rows(db, f, ap.delimiter)
     db.close
@@ -69,12 +69,13 @@ module Svsql
     '(' + row_values.map { |s| "'#{s}'" }.join(',') + ')'
   end
 
-  def self.create_table(column_names, db)
+  def self.create_table(column_names, db, ap)
     create_table_command_parts = []
     create_table_command_parts << "create table '#{DEFAULT_TABLE}' ("
     column_names.each_with_index do |_type, i|
+      type = ap.header_types[i] || 'nvarchar(32)'
       create_table_command_parts << ', ' unless i.zero?
-      create_table_command_parts << "\n #{column_names[i]} nvarchar(32)"
+      create_table_command_parts << "\n #{column_names[i]} #{type}"
     end
 
     create_table_command_parts << ");\n"
