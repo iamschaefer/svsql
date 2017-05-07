@@ -35,8 +35,8 @@ describe 'CSV file' do
   end
   it 'has correct column names' do
     result = @db.table_info('tsvql')
-    table_names = result.map { |r| r['name'] }
-    expect(table_names).to match_array %w[requestId host logname time method url response bytes referer useragent]
+    column_names = result.map { |r| r['name'] }
+    expect(column_names).to match_array %w[requestId host logname time method url response bytes referer useragent]
   end
   it 'has correct column types' do
     result = @db.table_info('tsvql')
